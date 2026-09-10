@@ -10,47 +10,48 @@
     <div class="container">
       <h1>World Clock</h1>
 
-      <select>
+      <select id="city-select">
         <option value="">Select a City..</option>
-        <option value="">United Kingdom</option>
-        <option value="">Cyprus</option>
-        <option value="">Egypt</option>
-        <option value="">Australia</option>
+        <option value="Europe/London">London</option>
+        <option value="Europe/Nicosia">Girne</option>
+        <option value="Africa/Cairo">Luxor</option>
+        <option value="Australia/Perth">Perth</option>
       </select>
+      <div id="city-container">
+        <div class="city" id="london">
+          <div>
+            <h2>London 🇬🇧</h2>
+            <div class="date">September 10th 2026</div>
+          </div>
 
-      <div class="city" id="london">
-        <div>
-          <h2>London 🇬🇧</h2>
-          <div class="date">September 10th 2026</div>
+          <div class="time">00:00:00 <small>AM</small></div>
         </div>
 
-        <div class="time">00:00:00 <small>AM</small></div>
-      </div>
+        <div class="city" id="girne">
+          <div>
+            <h2>Girne 🇹🇷</h2>
+            <div class="date">September 10th 2026</div>
+          </div>
 
-      <div class="city" id="girne">
-        <div>
-          <h2>Girne 🇹🇷</h2>
-          <div class="date">September 10th 2026</div>
+          <div class="time">00:00:00 <small>AM</small></div>
+        </div>
+        <div class="city" id="luxor">
+          <div>
+            <h2>Luxor 🇪🇬</h2>
+            <div class="date">September 10th 2026</div>
+          </div>
+
+          <div class="time">00:00:00 <small>AM</small></div>
         </div>
 
-        <div class="time">00:00:00 <small>AM</small></div>
-      </div>
-      <div class="city" id="luxor">
-        <div>
-          <h2>Luxor 🇪🇬</h2>
-          <div class="date">September 10th 2026</div>
+        <div class="city" id="perth">
+          <div>
+            <h2>Perth 🇦🇺</h2>
+            <div class="date">September 10th 2026</div>
+          </div>
+
+          <div class="time">00:00:00 <small>AM</small></div>
         </div>
-
-        <div class="time">00:00:00 <small>AM</small></div>
-      </div>
-
-      <div class="city" id="perth">
-        <div>
-          <h2>Perth 🇦🇺</h2>
-          <div class="date">September 10th 2026</div>
-        </div>
-
-        <div class="time">00:00:00 <small>AM</small></div>
       </div>
     </div>
     <footer>

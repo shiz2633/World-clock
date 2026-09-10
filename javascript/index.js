@@ -1,95 +1,61 @@
-let londonelement = document.querySelector("#london");
-function updateLondonTime() {
-  let now = new Date();
-  let londonTime = now.toLocaleString("en-GB", {
-    timeZone: "Europe/London",
+const cities = {
+  london: "Europe/London",
+  girne: "Europe/Nicosia",
+  luxor: "Africa/Cairo",
+  perth: "Australia/Perth",
+};
+
+const citySelect = document.querySelector("#city-select");
+const cityElements = document.querySelectorAll(".city");
+
+function updateCityTime(city, timeZone) {
+  const now = new Date();
+  const cityElement = document.querySelector(`#${city}`);
+
+  const cityTime = now.toLocaleString("en-GB", {
+    timeZone: timeZone,
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
     hour12: true,
   });
-  let londonDate = now.toLocaleDateString("en-GB", {
-    timeZone: "Europe/London",
+
+  const cityDate = now.toLocaleDateString("en-GB", {
+    timeZone: timeZone,
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  londonelement.querySelector(".date").innerHTML = londonDate;
-  londonelement.querySelector(".time").innerHTML = londonTime;
+  cityElement.querySelector(".date").innerHTML = cityDate;
+  cityElement.querySelector(".time").innerHTML = cityTime;
 }
 
-setInterval(updateLondonTime, 1000);
-updateLondonTime();
-
-let girneelement = document.querySelector("#girne");
-function updateGirneTime() {
-  let now = new Date();
-  let girneTime = now.toLocaleString("en-GB", {
-    timeZone: "Europe/Nicosia",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
+function updateAllCities() {
+  Object.entries(cities).forEach(([city, timeZone]) => {
+    updateCityTime(city, timeZone);
   });
-  let girneDate = now.toLocaleDateString("en-GB", {
-    timeZone: "Europe/Nicosia",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-
-  girneelement.querySelector(".date").innerHTML = girneDate;
-  girneelement.querySelector(".time").innerHTML = girneTime;
 }
 
-setInterval(updateGirneTime, 1000);
-updateGirneTime();
+citySelect.addEventListener("change", function () {
+  const selectedCity = citySelect.value;
 
-let luxorelement = document.querySelector("#luxor");
-function updateLuxorTime() {
-  let now = new Date();
-  let luxorTime = now.toLocaleString("en-GB", {
-    timeZone: "Africa/Cairo",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
+  cityElements.forEach(function (cityElement) {
+    if (selectedCity === "") {
+      // Show all cities
+      cityElement.style.display = "flex";
+    } else if (cities[cityElement.id] === selectedCity) {
+      // Show selected city
+      cityElement.style.display = "flex";
+    } else {
+      // Hide other cities
+      cityElement.style.display = "none";
+    }
   });
-  let luxorDate = now.toLocaleDateString("en-GB", {
-    timeZone: "Africa/Cairo",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+});
 
-  luxorelement.querySelector(".date").innerHTML = luxorDate;
-  luxorelement.querySelector(".time").innerHTML = luxorTime;
-}
+// Update all cities immediately
+updateAllCities();
 
-setInterval(updateLuxorTime, 1000);
-updateLuxorTime();
-
-let perthelement = document.querySelector("#perth");
-function updatePerthTime() {
-  let now = new Date();
-  let perthTime = now.toLocaleString("en-GB", {
-    timeZone: "Australia/Perth",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
-  let perthDate = now.toLocaleDateString("en-GB", {
-    timeZone: "Australia/Perth",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-
-  perthelement.querySelector(".date").innerHTML = perthDate;
-  perthelement.querySelector(".time").innerHTML = perthTime;
-}
-
-setInterval(updatePerthTime, 1000);
-updatePerthTime();
+// Keep all clocks live
+setInterval(updateAllCities, 1000);
