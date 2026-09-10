@@ -5,7 +5,6 @@ const cities = {
   perth: "Australia/Perth",
 };
 
-// Detect the user's current timezone
 const currentTimeZone = moment.tz.guess();
 
 const citySelect = document.querySelector("#city-select");
@@ -46,20 +45,16 @@ citySelect.addEventListener("change", function () {
 
   cityElements.forEach(function (cityElement) {
     if (selectedCity === "") {
-      // Show all cities
       cityElement.style.display = "flex";
     } else if (selectedCity === "current") {
-      // Show the city matching the user's current timezone
       if (cities[cityElement.id] === currentTimeZone) {
         cityElement.style.display = "flex";
       } else {
         cityElement.style.display = "none";
       }
     } else if (cities[cityElement.id] === selectedCity) {
-      // Show selected city
       cityElement.style.display = "flex";
     } else {
-      // Hide other cities
       cityElement.style.display = "none";
     }
   });
