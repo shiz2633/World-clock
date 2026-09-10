@@ -5,14 +5,18 @@ const cities = {
   perth: "Australia/Perth",
 };
 
+// Detect the user's current timezone
+const currentTimeZone = moment.tz.guess();
+
 const citySelect = document.querySelector("#city-select");
 const cityElements = document.querySelectorAll(".city");
 
 function updateCityTime(city, timeZone) {
   const now = new Date();
+
   const cityElement = document.querySelector(`#${city}`);
 
-  const cityTime = now.toLocaleString("en-GB", {
+  const cityTime = now.toLocaleTimeString("en-GB", {
     timeZone: timeZone,
     hour: "2-digit",
     minute: "2-digit",
@@ -44,6 +48,13 @@ citySelect.addEventListener("change", function () {
     if (selectedCity === "") {
       // Show all cities
       cityElement.style.display = "flex";
+    } else if (selectedCity === "current") {
+      // Show the city matching the user's current timezone
+      if (cities[cityElement.id] === currentTimeZone) {
+        cityElement.style.display = "flex";
+      } else {
+        cityElement.style.display = "none";
+      }
     } else if (cities[cityElement.id] === selectedCity) {
       // Show selected city
       cityElement.style.display = "flex";
@@ -57,5 +68,5 @@ citySelect.addEventListener("change", function () {
 // Update all cities immediately
 updateAllCities();
 
-// Keep all clocks live
+// Keep clocks live
 setInterval(updateAllCities, 1000);
