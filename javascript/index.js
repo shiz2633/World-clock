@@ -42,9 +42,18 @@ function updateAllCities() {
 
 citySelect.addEventListener("change", function () {
   const selectedCity = citySelect.value;
+  const cityContainer = document.querySelector("#city-container");
+
+  // Remove the homepage link if it already exists
+  const existingLink = document.querySelector("#home-link");
+
+  if (existingLink) {
+    existingLink.remove();
+  }
 
   cityElements.forEach(function (cityElement) {
     if (selectedCity === "") {
+      // Show all cities on the homepage
       cityElement.style.display = "flex";
     } else if (selectedCity === "current") {
       if (cities[cityElement.id] === currentTimeZone) {
@@ -58,8 +67,18 @@ citySelect.addEventListener("change", function () {
       cityElement.style.display = "none";
     }
   });
-});
 
+  // Add "All cities" link only when a city is selected
+  if (selectedCity !== "") {
+    const homeLink = document.createElement("a");
+
+    homeLink.id = "home-link";
+    homeLink.href = "/";
+    homeLink.textContent = "← All cities";
+
+    cityContainer.appendChild(homeLink);
+  }
+});
 // Update all cities immediately
 updateAllCities();
 
